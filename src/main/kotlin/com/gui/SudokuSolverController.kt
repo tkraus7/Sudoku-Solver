@@ -67,16 +67,25 @@ class SudokuSolverController {
         currentStyle = currentBox!!.style
 
         currentLabel!!.textFill = Color.RED
-        currentBox!!.style = "-fx-border-color: red; -fx-border-width: 3px"
+        currentBox!!.style = "-fx-border-color: red; -fx-border-width: 3px; -fx-background-color:" +
+                currentStyle!!.substring(currentStyle!!.lastIndexOf(" " + 1))
     }
 
     fun updateCurrent(value: Int, x: Int, y: Int) {
 
         val cl = labels[x][y]
         cl.textFill = Color.BLUE
-        cl.text = "$value"
+        cl.text = if (value != 0) "$value" else ""
         val cb = cl.parent as VBox
         setCurrent(cl, cb)
+    }
+
+    private fun Int.isOdd(): Boolean {
+        return this % 2 == 0
+    }
+
+    private fun Int.isEven(): Boolean {
+        return !this.isOdd()
     }
 
     @FXML
@@ -96,7 +105,12 @@ class SudokuSolverController {
 
                 val isOnBorder: (Int) -> Int = { x -> if (x == 2 || x == 5) 3 else 1 }
 
-                box.style = "-fx-border-color: black;-fx-border-width: 1px ${isOnBorder(j)}px ${isOnBorder(i)}px 1px"
+                box.style = "-fx-border-color: black;-fx-border-width: 1px ${isOnBorder(j)}px ${isOnBorder(i)}px 1px;"
+
+                box.style += if ((i.isOdd() and j.isEven()) or (i.isEven() and j.isOdd())) "-fx-background-color: grey"
+                else "-fx-background-color: lightgrey"
+
+
 
 
                 box.addEventHandler(MouseEvent.MOUSE_CLICKED) {
