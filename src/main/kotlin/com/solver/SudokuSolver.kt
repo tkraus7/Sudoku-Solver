@@ -21,10 +21,17 @@ class SudokuSolver(val board: Array<Array<Int>>) {
         return true
     }
 
-    fun isBoardValid(board: Array<Array<Int>>) : Boolean{
+    fun isBoardValid(board: Array<Array<Int>>): Boolean {
         for (i in 0..8) {
             for (j in 0..8) {
-                if (board[i][j] != 0 && !isValid(board[i][j], i, j, board)) return false
+                if (board[i][j] == 0) continue
+                else {
+                    val temp = board[i][j]
+                    board[i][j] = 0
+                    val ret = isValid(temp, i, j, board)
+                    board[i][j] = temp
+                    if (!ret) return false
+                }
             }
         }
         return true

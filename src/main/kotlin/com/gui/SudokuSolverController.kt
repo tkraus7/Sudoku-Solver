@@ -162,9 +162,6 @@ class SudokuSolverController {
             alert.show()
         }
 
-
-
-
     }
 
 }
