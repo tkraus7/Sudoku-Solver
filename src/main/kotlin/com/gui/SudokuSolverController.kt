@@ -1,4 +1,4 @@
-package com.example.kotlinjavafx
+package com.gui
 
 import javafx.fxml.FXML
 import javafx.geometry.Pos
@@ -20,7 +20,7 @@ class SudokuSolverController {
 
     @FXML private lateinit var gridPane: GridPane
 
-    private var labels = List(9) { List(9) { Label() } }
+    private var labels = Array(9) { Array(9) { Label() } }
 
     private var currentLabel: Label? = null
     private var currentBox: VBox? = null

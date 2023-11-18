@@ -1,4 +1,4 @@
-package com.example.kotlinjavafx
+package com.gui
 
 import javafx.application.Application
 import javafx.fxml.FXMLLoader

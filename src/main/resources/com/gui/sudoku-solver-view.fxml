@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="656.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kotlinjavafx.SudokuSolverController">
+<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="656.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gui.SudokuSolverController">
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
