@@ -7,9 +7,10 @@
     <top>
         <MenuBar BorderPane.alignment="CENTER">
             <menus>
-                <Menu mnemonicParsing="false" onAction="#createGrid" text="File">
+                <Menu mnemonicParsing="false" text="Controls">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Start" />
+                        <MenuItem mnemonicParsing="false" onAction="#createGrid" text="CreateGrid" />
+                  <MenuItem mnemonicParsing="false" onAction="#solveBoard" text="Solve" />
                     </items>
                 </Menu>
             </menus>

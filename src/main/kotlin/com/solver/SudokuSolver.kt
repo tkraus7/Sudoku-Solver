@@ -1,9 +1,11 @@
 package com.solver
 
+import com.gui.SudokuSolverController
 
-class SudokuSolver(private val board: Array<Array<Int>>) {
 
-    private fun isValid(value: Int, x: Int, y: Int): Boolean {
+class SudokuSolver(val board: Array<Array<Int>>) {
+
+    fun isValid(value: Int, x: Int, y: Int, board: Array<Array<Int>>): Boolean {
         for (i in board.indices) {
             if (value == board[i][y] || value == board[x][i]) return false
         }
@@ -19,18 +21,29 @@ class SudokuSolver(private val board: Array<Array<Int>>) {
         return true
     }
 
+    fun isBoardValid(board: Array<Array<Int>>) : Boolean{
+        for (i in 0..8) {
+            for (j in 0..8) {
+                if (board[i][j] != 0 && !isValid(board[i][j], i, j, board)) return false
+            }
+        }
+        return true
+    }
+
     fun solve(x: Int = 0, y: Int = 0): Boolean {
         if (x > 8) return true
         else if (y > 8) return solve(x + 1, 0)
 
         if (board[x][y] == 0) {
             for (i in 1..9) {
-                if (!isValid(i, x, y)) {
+                if (!isValid(i, x, y, board)) {
                     continue
                 } else {
                     board[x][y] = i
                     if (solve(x, y + 1)) return true
-                    else board[x][y] = 0
+                    else {
+                        board[x][y] = 0
+                    }
                 }
             }
             return false
