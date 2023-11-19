@@ -98,6 +98,7 @@ class SudokuSolverController {
                 labels[i][j].text = ""
                 labels[i][j].font = Font(MAX_FONT_SIZE)
                 labels[i][j].style = "-fx-font-weight: bold"
+                labels[i][j].textFill = Color.BLACK
 
                 val box = VBox()
                 box.alignment = Pos.CENTER
