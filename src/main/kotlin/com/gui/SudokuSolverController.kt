@@ -23,6 +23,8 @@ class SudokuSolverController {
 
     private val alert = Alert(Alert.AlertType.ERROR)
 
+    private var isRunning = false
+
     @FXML
     private lateinit var bp: BorderPane
 
@@ -84,6 +86,8 @@ class SudokuSolverController {
 
     @FXML
     private fun createGrid() {
+        timeline.stop()
+
         gridPane.isVisible = true
         gridPane.minHeight = GRID_BOX_SIZE
         gridPane.minWidth = GRID_BOX_SIZE
@@ -119,6 +123,14 @@ class SudokuSolverController {
         setKeyListener()
     }
 
+    private lateinit var listOfChanges: MutableList<Triple<Int, Int, Int>>
+
+    val timeline = Timeline(KeyFrame(Duration.millis(20.0), {
+        if (listOfChanges.isNotEmpty()) {
+            val (value, x, y) = listOfChanges.removeAt(0)
+            updateCurrent(value, x, y)
+        }
+    }))
 
     @FXML
     private fun solveBoard() {
@@ -132,7 +144,7 @@ class SudokuSolverController {
             }
         }
         val solver = SudokuSolver(board)
-        var listOfChanges = mutableListOf<Triple<Int, Int, Int>>()
+        listOfChanges = mutableListOf()
 
         fun solve(x: Int = 0, y: Int = 0): Boolean {
             if (x > 8) return true
@@ -159,12 +171,6 @@ class SudokuSolverController {
             }
         }
 
-        val timeline = Timeline(KeyFrame(Duration.millis(20.0), {
-            if (listOfChanges.isNotEmpty()) {
-                val (value, x, y) = listOfChanges.removeAt(0)
-                updateCurrent(value, x, y)
-            }
-        }))
 
         if (solver.isBoardValid(board)) {
             solve()
