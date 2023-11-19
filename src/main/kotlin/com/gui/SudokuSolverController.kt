@@ -19,7 +19,7 @@ import javafx.util.Duration
 
 class SudokuSolverController {
     private val GRID_BOX_SIZE = 600.0
-    private val MAX_FONT_SIZE = 30.0
+    private val MAX_FONT_SIZE = 50.0
 
     private val alert = Alert(Alert.AlertType.ERROR)
 
@@ -56,23 +56,20 @@ class SudokuSolverController {
     }
 
     private fun setCurrent(cl: Label, cb: VBox) {
-        currentLabel?.textFill = Color.BLACK
         currentBox?.style = currentStyle
 
         currentLabel = cl
         currentBox = cb
         currentStyle = currentBox!!.style
 
-        currentLabel!!.textFill = Color.RED
         currentBox!!.style = "-fx-border-color: red; -fx-border-width: 3px; -fx-background-color:" +
                 currentStyle!!.substring(currentStyle!!.lastIndexOf(" " + 1))
     }
 
     fun updateCurrent(value: Int, x: Int, y: Int) {
-
         val cl = labels[x][y]
-        cl.textFill = Color.BLUE
         cl.text = if (value != 0) "$value" else ""
+        cl.textFill = Color.RED
         val cb = cl.parent as VBox
         setCurrent(cl, cb)
     }
@@ -96,6 +93,7 @@ class SudokuSolverController {
             for (j in 0..8) {
                 labels[i][j].text = ""
                 labels[i][j].font = Font(MAX_FONT_SIZE)
+                labels[i][j].style = "-fx-font-weight: bold"
 
                 val box = VBox()
                 box.alignment = Pos.CENTER
@@ -124,6 +122,8 @@ class SudokuSolverController {
 
     @FXML
     private fun solveBoard() {
+        if (!gridPane.isVisible) return
+
         val board = Array(9) { Array(9) { 0 } }
         for (i in 0..8) {
             for (j in 0..8) {
