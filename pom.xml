@@ -57,7 +57,7 @@
                 <configuration>
                     <source>21</source>
                     <target>21</target>
-                    <release>8</release>
+<!--                    <release>8</release>-->
                 </configuration>
             </plugin>
             <plugin>
@@ -102,7 +102,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <jvmTarget>1.8</jvmTarget>
+<!--                    <jvmTarget>1.8</jvmTarget>-->
                 </configuration>
             </plugin>
 

@@ -3,9 +3,6 @@ package com.gui
 import com.solver.SudokuSolver
 import javafx.animation.KeyFrame
 import javafx.animation.Timeline
-import javafx.application.Platform
-import javafx.event.ActionEvent
-import javafx.event.EventHandler
 import javafx.fxml.FXML
 import javafx.geometry.Pos
 import javafx.scene.control.Alert
@@ -147,12 +144,12 @@ class SudokuSolverController {
                         continue
                     } else {
                         board[x][y] = i
-                        listOfChanges.addLast(Triple(i, x, y))
+                        listOfChanges.add(Triple(i, x, y))
 
                         if (solve(x, y + 1)) return true
                         else {
                             board[x][y] = 0
-                            listOfChanges.addLast(Triple(0, x, y))
+                            listOfChanges.add(Triple(0, x, y))
                         }
                     }
                 }
@@ -163,8 +160,10 @@ class SudokuSolverController {
         }
 
         val timeline = Timeline(KeyFrame(Duration.millis(20.0), {
-            val (value, x, y) = listOfChanges.removeFirst()
-            updateCurrent(value, x, y)
+            if (listOfChanges.isNotEmpty()) {
+                val (value, x, y) = listOfChanges.removeAt(0)
+                updateCurrent(value, x, y)
+            }
         }))
 
         if (solver.isBoardValid(board)) {
