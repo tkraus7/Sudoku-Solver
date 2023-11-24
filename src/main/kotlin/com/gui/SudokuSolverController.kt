@@ -3,6 +3,7 @@ package com.gui
 import com.solver.SudokuSolver
 import javafx.animation.KeyFrame
 import javafx.animation.Timeline
+import javafx.event.ActionEvent
 import javafx.fxml.FXML
 import javafx.geometry.Pos
 import javafx.scene.control.Alert
@@ -68,7 +69,7 @@ class SudokuSolverController {
                 currentStyle!!.substring(currentStyle!!.lastIndexOf(" " + 1))
     }
 
-    fun updateCurrent(value: Int, x: Int, y: Int) {
+    private fun updateCurrent(value: Int, x: Int, y: Int) {
         val cl = labels[x][y]
         cl.text = if (value != 0) "$value" else ""
         cl.textFill = Color.RED
@@ -110,9 +111,6 @@ class SudokuSolverController {
                 box.style += if ((i.isOdd() and j.isEven()) or (i.isEven() and j.isOdd())) "-fx-background-color: grey"
                 else "-fx-background-color: lightgrey"
 
-
-
-
                 box.addEventHandler(MouseEvent.MOUSE_CLICKED) {
                     setCurrent(labels[i][j], box)
                 }
@@ -126,7 +124,7 @@ class SudokuSolverController {
 
     private lateinit var listOfChanges: MutableList<Triple<Int, Int, Int>>
 
-    val timeline = Timeline(KeyFrame(Duration.millis(20.0), {
+    private val timeline = Timeline(KeyFrame(Duration.millis(20.0), {
         if (listOfChanges.isNotEmpty()) {
             val (value, x, y) = listOfChanges.removeAt(0)
             updateCurrent(value, x, y)
@@ -172,7 +170,6 @@ class SudokuSolverController {
             }
         }
 
-
         if (solver.isBoardValid(board)) {
             solve()
             timeline.cycleCount = listOfChanges.size
@@ -183,5 +180,21 @@ class SudokuSolverController {
         }
 
     }
+
+    private fun changeSpeed(rate: Double) {
+        timeline.rate = rate;
+    }
+
+    @FXML
+    private fun speedButton1() = changeSpeed(1.0)
+
+    @FXML
+    private fun speedButton2() = changeSpeed(2.0)
+
+    @FXML
+    private fun speedButton4() = changeSpeed(4.0)
+
+    @FXML
+    private fun speedButton16() = changeSpeed(16.0)
 
 }

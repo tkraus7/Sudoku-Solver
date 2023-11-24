@@ -9,8 +9,16 @@
             <menus>
                 <Menu mnemonicParsing="false" text="Controls">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#createGrid" text="CreateGrid" />
-                  <MenuItem mnemonicParsing="false" onAction="#solveBoard" text="Solve" />
+                        <MenuItem mnemonicParsing="false" onAction="#createGrid" text="Create grid" />
+                        <MenuItem mnemonicParsing="false" onAction="#solveBoard" text="Solve" />
+                  <Menu mnemonicParsing="false" text="Set speed">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#speedButton1" text="1" />
+                      <MenuItem mnemonicParsing="false" onAction="#speedButton2" text="2" />
+                        <MenuItem mnemonicParsing="false" onAction="#speedButton4" text="4" />
+                        <MenuItem mnemonicParsing="false" onAction="#speedButton16" text="16" />
+                    </items>
+                  </Menu>
                     </items>
                 </Menu>
             </menus>
